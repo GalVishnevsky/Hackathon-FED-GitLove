@@ -15,15 +15,20 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    this.props.firebase.users().on('value', snapshot => {
+    this.props.firebase.users().onSnapshot(snapshot => {
+      const users = {};
+      snapshot.docs.forEach(doc => {
+        users[doc.id] = doc.data()
+      });
+
       this.setState({
-        users: snapshot.val(),
+        users
       });
     });
   }
 
   componentWillUnmount() {
-    this.props.firebase.users().off();
+    // this.props.firebase.users().off();
   }
 
   render() {
