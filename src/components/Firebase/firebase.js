@@ -33,12 +33,6 @@ class Firebase {
   }
 
   // *** Auth API ***
-
-  doCreateUserWithEmailAndPassword = (email, password) =>
-    this.auth.createUserWithEmailAndPassword(email, password);
-
-  doSignInWithEmailAndPassword = (email, password) =>
-    this.auth.signInWithEmailAndPassword(email, password);
   
   doSignInWithFacebook = () =>
     this.auth.signInWithPopup(this.facebookProvider);

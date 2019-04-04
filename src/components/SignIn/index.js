@@ -2,18 +2,15 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
 
-import {PasswordForgetLink} from '../PasswordForget';
 import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
 import {
   Grid,
-  Form,
   Button,
   Header,
   Icon,
   Message,
-  Divider,
 } from 'semantic-ui-react';
 
 const SignInPage = () => (
@@ -22,18 +19,12 @@ const SignInPage = () => (
       <Header as="h3">
         Sign In / Sign Up
       </Header>
-      <SignInFacebook textAlign="center" />
-      
-
+      <SignInFacebook textAlign="center"/>
+    
+    
     </Grid.Column>
   </Grid>
 );
-
-const INITIAL_STATE = {
-  email:    '',
-  password: '',
-  error:    null,
-};
 
 const ERROR_CODE_ACCOUNT_EXISTS =
         'auth/account-exists-with-different-credential';
@@ -45,118 +36,54 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
   your personal account page.
 `;
 
-class SignInFormBase extends Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {...INITIAL_STATE};
-  }
-  
-  onSubmit = event => {
-    const {email, password} = this.state;
-    
-    this.props.firebase
-      .doSignInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState({...INITIAL_STATE});
-        this.props.history.push(ROUTES.HOME);
-      })
-      .catch(error => {
-        this.setState({error});
-      });
-    
-    event.preventDefault();
-  };
-  
-  onChange = event => {
-    this.setState({[event.target.name]: event.target.value});
-  };
-  
-  render() {
-    const {email, password, error} = this.state;
-    
-    const isInvalid = password === '' || email === '';
-    
-    return (
-      <div>
-        {error && (
-          <Message negative>
-            <p>{error.message}</p>
-          </Message>
-        )}
-        <Form onSubmit={this.onSubmit}>
-          <Form.Field>
-            <label>Email</label>
-            <input
-              name="email"
-              value={email}
-              onChange={this.onChange}
-              type="text"
-              placeholder="Email Address"
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Password</label>
-            <input
-              name="password"
-              value={password}
-              onChange={this.onChange}
-              type="password"
-              placeholder="Password"
-            />
-          </Form.Field>
-          <Button primary disabled={isInvalid} type="submit">
-            Submit
-          </Button>
-          <PasswordForgetLink />
-          <Divider horizontal>Or sign in with</Divider>
-        </Form>
-      </div>
-    );
-  }
-}
-
-
 class SignInFacebookBase extends Component {
   constructor(props) {
     super(props);
-
-    this.state = { error: null };
+    
+    this.state = {error: null};
   }
-
-  onSubmit = event => {
-    this.props.firebase
-      .doSignInWithFacebook()
-      .then(socialAuthUser => {
-        // Create a user in your Firebase Realtime Database too
-        return this.props.firebase.user(socialAuthUser.user.uid).set({
-          username: socialAuthUser.additionalUserInfo.profile.name,
-          email: socialAuthUser.additionalUserInfo.profile.email,
-          roles: [],
-        });
+  
+  onSubmit = (event) => {
+    let socialAuthUser;
+    
+    this.props.firebase.doSignInWithFacebook()
+      .then((authUser) => {
+        socialAuthUser = authUser;
+        return this.props.firebase.user(authUser.user.uid).get();
       })
+      .then(
+        (userDocument) => {
+          debugger
+          if(!userDocument.exists) {
+            return this.props.firebase.user(socialAuthUser.user.uid).set({
+                        name:      socialAuthUser.additionalUserInfo.profile.name,
+                        facebookEmail: socialAuthUser.additionalUserInfo.profile.email
+                      });
+          }
+        }
+      )
       .then(() => {
         this.setState({ error: null });
-        this.props.history.push(ROUTES.HOME);
+        this.props.history.push(ROUTES.SET_UP);
       })
       .catch(error => {
-        if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
+        if(error.code === ERROR_CODE_ACCOUNT_EXISTS) {
           error.message = ERROR_MSG_ACCOUNT_EXISTS;
         }
-
+        
         this.setState({ error });
       });
-
+    
     event.preventDefault();
   };
-
+  
   render() {
-    const { error } = this.state;
-
+    const {error} = this.state;
+    
     return (
       <form onSubmit={this.onSubmit} className="inline">
         <Button color="facebook" type="submit">
-          <Icon name="facebook" /> Facebook
+          <Icon name="facebook"/> Facebook
         </Button>
         
         {error && (
@@ -170,7 +97,7 @@ class SignInFacebookBase extends Component {
 }
 
 const SignInFacebook = compose(
-  withRouter,
+  withRouter, withFirebase
 )(SignInFacebookBase);
 
 export default SignInPage;
