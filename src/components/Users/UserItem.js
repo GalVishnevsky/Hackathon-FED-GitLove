@@ -32,7 +32,7 @@ class UserItem extends Component {
   }
 
   componentWillUnmount() {
-    this.props.firebase.user(this.props.match.params.id).off();
+    // this.props.firebase.user(this.props.match.params.id).off();
   }
 
   onSendPasswordResetEmail = () => {

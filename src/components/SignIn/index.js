@@ -22,7 +22,9 @@ const SignInPage = () => (
       <Header as="h3">
         Sign In / Sign Up
       </Header>
-      <SignInFacebook/>
+      <SignInFacebook textAlign="center" />
+      
+
     </Grid.Column>
   </Grid>
 );
@@ -106,7 +108,7 @@ class SignInFormBase extends Component {
           <Button primary disabled={isInvalid} type="submit">
             Submit
           </Button>
-          <PasswordForgetLink/>
+          <PasswordForgetLink />
           <Divider horizontal>Or sign in with</Divider>
         </Form>
       </div>
@@ -114,44 +116,47 @@ class SignInFormBase extends Component {
   }
 }
 
+
 class SignInFacebookBase extends Component {
   constructor(props) {
     super(props);
-    
-    this.state = {error: null};
+
+    this.state = { error: null };
   }
-  
+
   onSubmit = event => {
     this.props.firebase
       .doSignInWithFacebook()
       .then(socialAuthUser => {
-        let loginParams = {
-          id:       socialAuthUser.user.uid,
+        // Create a user in your Firebase Realtime Database too
+        return this.props.firebase.user(socialAuthUser.user.uid).set({
           username: socialAuthUser.additionalUserInfo.profile.name,
-          email:    socialAuthUser.additionalUserInfo.profile.email
-        };
-        
-        this.setState({error: null});
-        this.props.history.push(ROUTES.SIGN_UP);
+          email: socialAuthUser.additionalUserInfo.profile.email,
+          roles: [],
+        });
+      })
+      .then(() => {
+        this.setState({ error: null });
+        this.props.history.push(ROUTES.HOME);
       })
       .catch(error => {
-        if(error.code === ERROR_CODE_ACCOUNT_EXISTS) {
+        if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
           error.message = ERROR_MSG_ACCOUNT_EXISTS;
         }
-        
-        this.setState({error});
+
+        this.setState({ error });
       });
-    
+
     event.preventDefault();
   };
-  
+
   render() {
-    const {error} = this.state;
-    
+    const { error } = this.state;
+
     return (
       <form onSubmit={this.onSubmit} className="inline">
         <Button color="facebook" type="submit">
-          <Icon name="facebook"/> Facebook
+          <Icon name="facebook" /> Facebook
         </Button>
         
         {error && (

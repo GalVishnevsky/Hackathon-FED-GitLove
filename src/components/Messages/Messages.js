@@ -34,10 +34,10 @@ class Messages extends Component {
 
     this.props.firebase
       .messages()
-      .orderByChild('createdAt')
-      .limitToLast(this.state.limit)
-      .on('value', snapshot => {
-        const messageObject = snapshot.val();
+      .orderBy('createdAt')
+      .limit(this.state.limit)
+      .onSnapshot(snapshot => {
+        const messageObject = snapshot.docs.map(i => i.data());
 
         if (messageObject) {
           const messageList = Object.keys(messageObject).map(key => ({
@@ -56,7 +56,8 @@ class Messages extends Component {
   };
 
   componentWillUnmount() {
-    this.props.firebase.messages().off();
+    // this.props.firebase.messages().off();
+
   }
 
   onChangeText = event => {
@@ -64,10 +65,11 @@ class Messages extends Component {
   };
 
   onCreateMessage = (event, authUser) => {
-    this.props.firebase.messages().push({
+    debugger;
+    this.props.firebase.messages().add({
       text: this.state.text,
       userId: authUser.uid,
-      createdAt: this.props.firebase.serverValue.TIMESTAMP,
+      createdAt: Date.now(),
     });
 
     this.setState({ text: '' });
@@ -79,7 +81,7 @@ class Messages extends Component {
     this.props.firebase.message(message.uid).set({
       ...message,
       text,
-      editedAt: this.props.firebase.serverValue.TIMESTAMP,
+      editedAt: Date.now(),
     });
   };
 
