@@ -46,7 +46,8 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
 class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
-
+  
+    this.state = this.props;
     this.state = { ...INITIAL_STATE };
   }
 

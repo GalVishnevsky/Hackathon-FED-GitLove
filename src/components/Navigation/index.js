@@ -39,7 +39,7 @@ const NavigationNonAuth = () => (
     <Container>
       <Menu.Item name="home" as={Link} to={ROUTES.LANDING} />
       <Menu.Menu position="right">
-        <Menu.Item name="signin" as={Link} to={ROUTES.SIGN_IN} />
+        <Menu.Item name="Sign in" as={Link} to={ROUTES.SIGN_IN} />
       </Menu.Menu>
     </Container>
   </Menu>
