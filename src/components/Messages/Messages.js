@@ -65,7 +65,6 @@ class Messages extends Component {
   };
 
   onCreateMessage = (event, authUser) => {
-    debugger;
     this.props.firebase.messages().add({
       text: this.state.text,
       userId: authUser.uid,
