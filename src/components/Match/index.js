@@ -56,10 +56,19 @@ class MatchBase extends Component {
                 <div className='swipeCon'>
                     {
                         this.state.swipes.map(swipe => {
-                            return (<Swipe username={swipe.username} userId={swipe.usedId} pic={swipe.profilePic} score={swipe.rank}
+                            return (<Swipe username={swipe.username} userId={swipe.usedId} pic={swipe.profilePic}
+                                           score={swipe.rank} langs={swipe.languages}
                                            auth={auth}></Swipe>)
                         })
                     }
+                    <div style={{
+                        position: 'absolute',
+                        top: '603.2px',
+                        left: '107.5px'
+                    }}>
+                        <img src="/images/icon-04.png" id="xLogo"></img>
+                        <img src="/images/icon-05.png" id="vLogo"></img>
+                    </div>
                 </div>
             );
         } else {

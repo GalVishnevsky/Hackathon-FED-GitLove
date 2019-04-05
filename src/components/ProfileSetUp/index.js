@@ -65,7 +65,7 @@ class SignUpFormBase extends Component {
     })
       .then(() => {
         this.setState({error: null});
-        this.props.history.push(ROUTES.QUESTION);
+        this.props.history.push(ROUTES.MATCH);
       })
       .catch(error => {
         if(error.code === ERROR_CODE_ACCOUNT_EXISTS) {
@@ -107,6 +107,9 @@ class SignUpFormBase extends Component {
             <h1 id="welcomeMessage">
               Hi, {this.state.facebookUser.name}
             </h1>
+            <label className="signUpMessage">
+              Let's connect to GitHub and 10bis
+            </label>
             <input
               name="username"
               value={username}
@@ -116,7 +119,6 @@ class SignUpFormBase extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <label>Github Username</label>
             <input
               name="gitUsername"
               value={gitUsername}
@@ -126,7 +128,6 @@ class SignUpFormBase extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <label>10Bis Email</label>
             <input
               name="tenBisEmail"
               value={tenBisEmail}
@@ -137,18 +138,17 @@ class SignUpFormBase extends Component {
           </Form.Field>
           <Form.Group widths="equal">
             <Form.Field>
-              <label>10Bis Password</label>
               <input
                 name="tenBisPassword"
                 value={tenBisPassword}
                 onChange={this.onChange}
                 type="password"
-                placeholder="Password"
+                placeholder="10Bis Password"
               />
             </Form.Field>
           </Form.Group>
-          <Button primary disabled={isInvalid} type="submit">
-            Continue
+          <Button primary disabled={isInvalid} type="submit" className="signUpButton">
+            Connect
           </Button>
         </Form>
       </div>
