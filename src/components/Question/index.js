@@ -9,14 +9,19 @@ import hetero from '../../assets/hetero.svg';
 import lesbian from '../../assets/lesbian.svg';
 import trans from '../../assets/trans.svg';
 
+import cat from '../../assets/cat.svg';
+import dog from '../../assets/dog.svg';
+import duck from '../../assets/duck.svg';
+import fish from '../../assets/fish.svg';
+
 import {
   Grid, Header, Divider, Image,
 } from 'semantic-ui-react';
 import withAuthentication from '../Session/withAuthentication';
+import * as ROUTES from '../../constants/routes';
 
 const questions = [
   {
-    image:   ``,
     label:   `What is your sexual orientation?`,
     answers: [{
       value: 'hetero',
@@ -35,51 +40,34 @@ const questions = [
   },
   {
     image:   ``,
-    label:   `What is your sexual orientation?`,
+    label:   `What is favorite animal?`,
     answers: [{
-      value: 'male',
-      image: ``
+      value: 'cat',
+      image: cat
     },
       {
-        value: 'female',
-        image: ``
+        value: 'dog',
+        image: dog
       }, {
-        value: 'both',
-        image: ``
-      }]
-  },
-  {
-    image:   ``,
-    label:   `What is your sexual orientation?`,
-    answers: [{
-      value: 'male',
-      image: ``
-    },
-      {
-        value: 'female',
-        image: ``
+        value: 'duck',
+        image: duck
       }, {
-        value: 'both',
-        image: ``
+        value: 'fish',
+        image: fish
       }]
-  }
-];
+  }];
 
 class QuestionViewBase extends Component {
   constructor(props) {
     super();
-    
-    this.state = {error: null};
+    this.question = questions.shift();
   }
   
   render() {
-    this.question = questions[0];
-    
     return (
       <Grid centered columns={2}>
         <Grid.Row textAlign="center">
           <form onSubmit={this.onSubmit} className="inline">
-            <Image src={this.question.image} size='medium' circular/>
             <Header as='h2'>{this.question.label}</Header>
             <Divider></Divider>
             
@@ -89,7 +77,8 @@ class QuestionViewBase extends Component {
                   // Return the element. Also pass key
                   return (
                     <Grid.Column key={answer.value}>
-                      <Image src={answer.image} className={this.selectedAnswer === answer.value? '' : 'clickable no-fill'}
+                      <Image src={answer.image}
+                             className={this.selectedAnswer === answer.value ? '' : 'clickable no-fill'}
                              onClick={this.onAnswerClick.bind(this, answer.value)}/>
                     </Grid.Column>)
                 })}
@@ -103,8 +92,14 @@ class QuestionViewBase extends Component {
   }
   
   onAnswerClick(answer) {
-    this.selectedAnswer = answer;
-    this.setState({errors: null});
+    if(answer) {
+      this.question = questions.shift();
+      this.setState({errors: null});
+      
+      if(!this.question) {
+        this.props.history.push(ROUTES.MATCH);
+      }
+    }
   }
 }
 
