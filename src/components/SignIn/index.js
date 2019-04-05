@@ -14,14 +14,10 @@ import {
 } from 'semantic-ui-react';
 
 const SignInPage = () => (
-  <Grid centered columns={2}>
+  <Grid centered columns={1}>
     <Grid.Column textAlign="center">
-      <Header as="h3">
-        Sign In / Sign Up
-      </Header>
+      <img src="/images/logo.png" id="logo"></img>
       <SignInFacebook textAlign="center"/>
-    
-    
     </Grid.Column>
   </Grid>
 );
@@ -84,8 +80,8 @@ class SignInFacebookBase extends Component {
     
     return (
       <form onSubmit={this.onSubmit} className="inline">
-        <Button color="facebook" type="submit">
-          <Icon name="facebook"/> Facebook
+        <Button type="submit" className="facebookLogin">
+          <Icon name="facebook"/> Connect with Facebook
         </Button>
         
         {error && (
