@@ -148,7 +148,7 @@ class SignUpFormBase extends Component {
             </Form.Field>
           </Form.Group>
           <Button primary disabled={isInvalid} type="submit">
-            Sign Up
+            Continue
           </Button>
         </Form>
       </div>
