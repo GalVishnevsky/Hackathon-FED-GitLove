@@ -77,9 +77,10 @@ class QuestionViewBase extends Component {
                   // Return the element. Also pass key
                   return (
                     <Grid.Column key={answer.value}>
-                      <Image src={answer.image}
-                             className={this.selectedAnswer === answer.value ? '' : 'clickable no-fill'}
+                      <Image src={answer.image} size="small"
+                             className={this.selectedAnswer === answer.value ? 'question-image' : 'question-image clickable no-fill'}
                              onClick={this.onAnswerClick.bind(this, answer.value)}/>
+                      <Header as='h3'>{answer.value.charAt(0).toUpperCase() + answer.value.slice(1)}</Header>
                     </Grid.Column>)
                 })}
               </Grid.Row>

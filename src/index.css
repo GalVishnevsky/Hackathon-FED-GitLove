@@ -78,3 +78,7 @@ label.signUpMessage {
     line-height: 1;
     color: #7d7d7d !important;
 }
+
+.question-image {
+  margin-left: 20px;
+  }
