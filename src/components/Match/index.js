@@ -40,7 +40,7 @@ class MatchBase extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://gitlove.herokuapp.com/getMatches/QABItfq1u84qrOi1HbQx').then((res) => {
+        axios.get('https://gitlove.herokuapp.com/getMatches/20FW9KzUP6XV4HZPrW6PXD3PTie2').then((res) => {
             this.setState({
                 swipes: res.data
             })
