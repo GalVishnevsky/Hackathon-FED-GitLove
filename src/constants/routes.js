@@ -1,6 +1,6 @@
-export const LANDING         = '/';
+// export const LANDING         = '/';
 export const SET_UP          = '/setup';
-export const SIGN_IN         = '/signin';
+export const SIGN_IN         = '/';
 export const HOME            = '/home';
 export const ACCOUNT         = '/account';
 export const QUESTION        = '/question';

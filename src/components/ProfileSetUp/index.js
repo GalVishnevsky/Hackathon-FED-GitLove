@@ -15,11 +15,8 @@ import {
 import {withAuthentication} from '../Session';
 
 const ProfileSetUpPage = () => (
-  <Grid centered columns={2}>
-    <Grid.Column>
-      <Header as="h2" textAlign="center">
-        Set Up
-      </Header>
+  <Grid centered columns={1}>
+    <Grid.Column textAlign="center">
       <SignUpForm/>
     </Grid.Column>
   </Grid>
@@ -49,7 +46,11 @@ class SignUpFormBase extends Component {
     super(props);
     
     this.state = this.props;
-    this.state = {...INITIAL_STATE};
+    this.state = {...INITIAL_STATE, ...{
+      facebookUser: JSON.parse(localStorage.getItem("facebookData") || {})
+    }};
+
+    this.state.username = this.state.facebookUser.name;
   }
   
   onSubmit = event => {
@@ -102,7 +103,10 @@ class SignUpFormBase extends Component {
         )}
         <Form onSubmit={this.onSubmit}>
           <Form.Field>
-            <label>GitLove Username</label>
+            <img className="profilePic" src={`https://graph.facebook.com/${this.state.facebookUser.id}/picture?width=800`} />
+            <h1 id="welcomeMessage">
+              Hi, {this.state.facebookUser.name}
+            </h1>
             <input
               name="username"
               value={username}

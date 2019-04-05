@@ -23,12 +23,12 @@ code {
   margin-top: 80px;
 }
 
-button.ui-btn.facebookLogin {
+button.ui.facebookLogin {
   color: white;
   background-image: linear-gradient(to right, #b91954, #f400f3);
 }
 
-div.ui-page[data-url='/signin'] {
+div.ui-page[data-url='/'] {
   background-image: url(/images/footer.png);
   background-repeat: no-repeat;
   background-position: bottom;
@@ -37,8 +37,19 @@ div.ui-page[data-url='/signin'] {
 
 .clickable {
   cursor: pointer;
-  }
+}
 
 .no-fill {
   fill: none;
-  }
+}
+
+.profilePic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+#welcomeMessage {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #c3c3c3;
+}
