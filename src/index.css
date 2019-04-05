@@ -23,12 +23,12 @@ code {
   margin-top: 80px;
 }
 
-button.ui-btn.facebookLogin {
+button.ui.facebookLogin {
   color: white;
   background-image: linear-gradient(to right, #b91954, #f400f3);
 }
 
-div.ui-page[data-url='/signin'] {
+div.ui-page[data-url='/'] {
   background-image: url(/images/footer.png);
   background-repeat: no-repeat;
   background-position: bottom;

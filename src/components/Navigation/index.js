@@ -23,7 +23,7 @@ const Navigation = () => (
 const NavigationAuth = ({ authUser }) => (
   <Menu pointing secondary>
     <Container>
-      <Menu.Item name="Landing" as={Link} to={ROUTES.LANDING} />
+      {/* <Menu.Item name="Landing" as={Link} to={ROUTES.LANDING} /> */}
       <Menu.Item name="home" as={Link} to={ROUTES.HOME} />
       <Menu.Item name="Account" as={Link} to={ROUTES.ACCOUNT} />
       <SignOutButton />
@@ -34,7 +34,7 @@ const NavigationAuth = ({ authUser }) => (
 const NavigationNonAuth = () => (
   <Menu pointing secondary>
     <Container>
-      <Menu.Item name="home" as={Link} to={ROUTES.LANDING} />
+      {/* <Menu.Item name="home" as={Link} to={ROUTES.LANDING} /> */}
       <Menu.Menu position="right">
         <Menu.Item name="Sign in" as={Link} to={ROUTES.SIGN_IN} />
       </Menu.Menu>
