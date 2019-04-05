@@ -16,6 +16,7 @@ import { withAuthentication } from '../Session';
 import { Container } from 'semantic-ui-react';
 import {QuestionView} from '../Question';
 import {Match} from "../Match";
+import MatchFoundPage from '../MatchFound';
 
 const App = () => (
   <Router>
