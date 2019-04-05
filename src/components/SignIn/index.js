@@ -49,11 +49,10 @@ class SignInFacebookBase extends Component {
       })
       .then(
         (userDocument) => {
-          debugger
+          localStorage.setItem("facebookData", JSON.stringify(socialAuthUser.additionalUserInfo.profile))
           if(!userDocument.exists) {
             return this.props.firebase.user(socialAuthUser.user.uid).set({
               name:          socialAuthUser.additionalUserInfo.profile.name,
-              facebookEmail: socialAuthUser.additionalUserInfo.profile.email,
               profilePic:    `https://graph.facebook.com/${socialAuthUser.additionalUserInfo.profile.id}/picture?width=800`,
               gender:        'male'
             });
