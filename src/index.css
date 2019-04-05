@@ -28,6 +28,15 @@ button.ui-btn.facebookLogin {
   background-image: linear-gradient(to right, #b91954, #f400f3);
 }
 
+.swipeCon{
+  margin-top: -16px;
+margin-left: -14px;
+margin-right: -14px;
+  width: auto;
+  height: 420px;
+  background-image: linear-gradient(to right, #b91954, #f400f3);
+}
+
 div.ui-page[data-url='/signin'] {
   background-image: url(/images/footer.png);
   background-repeat: no-repeat;

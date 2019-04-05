@@ -1,52 +1,42 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './index.css';
 import axios from 'axios';
+import {Header} from "semantic-ui-react";
 
 const $ = window.$;
 
 export class Swipe extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {};
+        this.swipe = false;
     }
 
     componentDidMount() {
-        $(".buddy").on("swiperight", function () {
+        const self = this;
+
+        $("#" + this.props.userId).on("swiperight", function (event) {
+            // event.preventDefault()
             $(this).addClass('rotate-left').delay(700).fadeOut(1);
-            $('.buddy').find('.status').remove();
+            $("#" + self.props.userId).find('.status').remove();
 
-            $(this).append('<div class="status like">Like!</div>');
-
-            axios.post('https://gitlove.herokuapp.com/match', {
-                userId: this.props.auth.uid,
-                matchedId: this.props.id,
+            $("#" + self.props.userId).append('<div class="status like">Like!</div>');            //
+            axios.post('http://172.168.168.67:5000/match', {
+                userId: self.props.auth.uid,
+                matchedId: self.props.userId,
                 result: true
             });
-
-            if ($(this).is(':last-child')) {
-                $('.buddy:nth-child(1)').removeClass('rotate-left rotate-right').fadeIn(300);
-            } else {
-                $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
-            }
+            // $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
         });
 
-        $(".buddy").on("swipeleft", function () {
+        $("#" + this.props.userId).on("swipeleft", function (event) {
+            // event.preventDefault()
+
             $(this).addClass('rotate-right').delay(700).fadeOut(1);
-            $('.buddy').find('.status').remove();
-            $(this).append('<div class="status dislike">Dislike!</div>');
+            $("#" + self.props.userId).find('.status').remove();
+            $("#" + self.props.userId).append('<div class="status dislike">Dislike!</div>');
 
-            if ($(this).is(':last-child')) {
-                $('.buddy:nth-child(1)').removeClass('rotate-left rotate-right').fadeIn(300);
+            // $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
 
-                axios.post('https://gitlove.herokuapp.com/match', {
-                    userId: this.props.auth.uid,
-                    matchedId: this.props.id,
-                    result: false
-                });
-            } else {
-                $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
-            }
         });
     }
 
@@ -56,9 +46,16 @@ export class Swipe extends Component {
             display: 'block'
         };
         return (
-            <div className="buddy" style={{ display: "block" }}>
+            <div className="buddy" id={this.props.userId} style={{display: "block"}}>
                 <div className="avatar" style={divStyle}>
                 </div>
+                <div className='score'>
+                    <span className='inScore'>                    {this.props.score}%
+</span>
+                </div>
+                <Header as='h3' style={{backgroundColor: '#f9f9f9'}}>
+                    {this.props.username}
+                </Header>
             </div>
         );
     }
