@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
 import axios from 'axios'
+import _ from 'lodash'
 import {withFirebase} from '../Firebase';
 
 import {
@@ -53,7 +54,7 @@ class MatchBase extends Component {
       return (
         <div className='swipeCon'>
           {
-            this.state.swipes.map(swipe => {
+            _.orderBy(this.state.swipes, ['rank'], ['asc']).map(swipe => {
               return (<Swipe username={swipe.username} userId={swipe.usedId}
                              pic={swipe.profilePic}
                              score={swipe.rank} langs={swipe.languages}

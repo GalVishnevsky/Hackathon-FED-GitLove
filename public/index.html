@@ -28,6 +28,7 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+    <button id="FS">FS</button>
     <div id="root"></div>
     <!--
       This HTML file is a template.
@@ -39,5 +40,20 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      document.getElementById("FS").addEventListener("click", () => {
+        document.getElementById("FS").remove();
+        const elem = document.body;
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { /* Firefox */
+          elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+          elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE/Edge */
+          elem.msRequestFullscreen();
+        }
+      });
+    </script>
   </body>
 </html>

@@ -19,7 +19,7 @@
     width: 350px;
     height: 360px;
     top: 75px;
-    left: 7%;
+    /*left: 7%;*/
     position: absolute;
     cursor: hand;
 }

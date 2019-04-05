@@ -35,7 +35,9 @@ button.ui.facebookLogin {
   width:            auto;
   height:           420px;
   background-image: linear-gradient(to right, #b91954, #f400f3);
-  }
+  display: flex;
+  justify-content: center;
+}
 
 div.ui-page[data-url='/'] {
   background-image:    url(/images/footer.png);
