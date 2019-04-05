@@ -65,7 +65,7 @@ class SignUpFormBase extends Component {
     })
       .then(() => {
         this.setState({error: null});
-        this.props.history.push(ROUTES.MATCH);
+        this.props.history.push(ROUTES.QUESTION);
       })
       .catch(error => {
         if(error.code === ERROR_CODE_ACCOUNT_EXISTS) {
