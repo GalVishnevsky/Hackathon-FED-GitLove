@@ -15,6 +15,7 @@ import { withAuthentication } from '../Session';
 
 import { Container } from 'semantic-ui-react';
 import {QuestionView} from '../Question';
+import {Match} from "../Match";
 
 const App = () => (
   <Router>
@@ -30,6 +31,7 @@ const App = () => (
         />
         <Route path={ROUTES.HOME} component={HomePage} />
         <Route path={ROUTES.ACCOUNT} component={AccountPage} />
+        <Route path={ROUTES.MATCH} component={Match} />
         <Route path={ROUTES.ADMIN} component={AdminPage} />
         <Route path={ROUTES.QUESTION} component={QuestionView}/>
       </Container>

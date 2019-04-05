@@ -2,9 +2,9 @@
 export const SET_UP          = '/setup';
 export const SIGN_IN         = '/';
 export const HOME            = '/home';
+export const MATCH            = '/match';
 export const ACCOUNT         = '/account';
 export const QUESTION        = '/question';
 export const PASSWORD_FORGET = '/pw-forget';
 export const ADMIN           = '/admin';
 export const ADMIN_DETAILS   = '/admin/:id';
-export const MATCH           = '/match';
