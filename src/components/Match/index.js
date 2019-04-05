@@ -61,14 +61,14 @@ class MatchBase extends Component {
                                            auth={auth}></Swipe>)
                         })
                     }
-                    <div style={{
-                        position: 'absolute',
-                        top: '603.2px',
-                        left: '107.5px'
-                    }}>
-                        <img src="/images/icon-04.png" id="xLogo"></img>
-                        <img src="/images/icon-05.png" id="vLogo"></img>
-                    </div>
+                    {/*<div style={{*/}
+                        {/*position: 'absolute',*/}
+                        {/*top: '603.2px',*/}
+                        {/*left: '107.5px'*/}
+                    {/*}}>*/}
+                        {/*/!*<img src="/images/icon-04.png" id="xLogo"></img>*!/*/}
+                        {/*/!*<img src="/images/icon-05.png" id="vLogo"></img>*!/*/}
+                    {/*</div>*/}
                 </div>
             );
         } else {
