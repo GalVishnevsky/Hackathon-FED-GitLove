@@ -23,7 +23,7 @@ const App = () => (
       <Container>
         {/* <Route exact path={ROUTES.LANDING} component={LandingPage} /> */}
         <Route path={ROUTES.SET_UP} component={ProfileSetUpPage} />
-        <Route path={ROUTES.SIGN_IN} component={SignInPage} />
+        <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
         <Route
           path={ROUTES.PASSWORD_FORGET}
           component={PasswordForgetPage}
