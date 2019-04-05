@@ -62,3 +62,7 @@ div.ui-page[data-url='/'] {
   padding-bottom: 20px;
   border-bottom: 1px solid #c3c3c3;
 }
+
+.question-image {
+  margin-left: 20px;
+  }
