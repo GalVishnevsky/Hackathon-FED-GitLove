@@ -11,7 +11,6 @@ import {
   Grid,
   Header,
   Message,
-  Checkbox,
 } from 'semantic-ui-react';
 import {withAuthentication} from '../Session';
 
@@ -56,7 +55,7 @@ class SignUpFormBase extends Component {
   onSubmit = event => {
     const {username, gitUsername, tenBisEmail, tenBisPassword} = this.state;
     
-    return axios.post('http://172.168.168.67:5000/updateProfile', {
+    return axios.post('https://gitlove.herokuapp.com/updateProfile', {
       userId: this.props.auth.uid,
       username,
       gitUsername,

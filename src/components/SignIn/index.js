@@ -52,14 +52,16 @@ class SignInFacebookBase extends Component {
           debugger
           if(!userDocument.exists) {
             return this.props.firebase.user(socialAuthUser.user.uid).set({
-                        name:      socialAuthUser.additionalUserInfo.profile.name,
-                        facebookEmail: socialAuthUser.additionalUserInfo.profile.email
-                      });
+              name:          socialAuthUser.additionalUserInfo.profile.name,
+              facebookEmail: socialAuthUser.additionalUserInfo.profile.email,
+              profilePic:    `https://graph.facebook.com/${socialAuthUser.additionalUserInfo.profile.id}/picture?width=800`,
+              gender:        'male'
+            });
           }
         }
       )
       .then(() => {
-        this.setState({ error: null });
+        this.setState({error: null});
         this.props.history.push(ROUTES.SET_UP);
       })
       .catch(error => {
@@ -67,7 +69,7 @@ class SignInFacebookBase extends Component {
           error.message = ERROR_MSG_ACCOUNT_EXISTS;
         }
         
-        this.setState({ error });
+        this.setState({error});
       });
     
     event.preventDefault();

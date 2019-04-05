@@ -34,3 +34,11 @@ div.ui-page[data-url='/'] {
   background-position: bottom;
   background-size: contain;
 }
+
+.clickable {
+  cursor: pointer;
+  }
+
+.no-fill {
+  fill: none;
+  }
