@@ -63,6 +63,11 @@ div.ui-page[data-url='/'] {
   border-bottom: 1px solid #c3c3c3;
 }
 
+#xLogo, #vLogo {
+    width: 101px;
+    height: 101px;
+}
+
 button.signUpButton {
     background-image: linear-gradient(to right, #b91954, #f400f3) !important;
 }
