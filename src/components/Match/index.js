@@ -48,17 +48,19 @@ class MatchBase extends Component {
   }
   
   render() {
+    this.counter = 0;
+    
     if(this.state.swipes.length) {
       this.setState({hasFetched: true});
       
       return (
         <div className='swipeCon'>
           {
-            _.orderBy(this.state.swipes, ['rank'], ['asc']).map(swipe => {
+            _.orderBy(this.state.swipes, ['rank'], ['asc']).map((swipe, i) => {
               return (<Swipe username={swipe.username} userId={swipe.usedId}
                              pic={swipe.profilePic}
                              score={swipe.rank} langs={swipe.languages}
-                             auth={this.props.auth}></Swipe>)
+                             auth={this.props.auth} counter={i}></Swipe>)
             })
           }
           <div style={{

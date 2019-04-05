@@ -21,17 +21,12 @@ export class Swipe extends Component {
       $(this).addClass('rotate-left').delay(700).fadeOut(1);
       $("#" + self.props.userId).find('.status').remove();
       
-      $("#" + self.props.userId).append('<div class="status like">Like!</div>');            //
-      axios.post('https://gitlove.herokuapp.com/match', {
-        userId:    self.props.auth.uid,
-        matchedId: self.props.userId
-      }).then((response) => {
-        
-        if(response.data.match) {
-          self.isMatched = true;
-          self.setState({errors: null});
-        }
-      });
+      $("#" + self.props.userId).append('<div class="status like">Like!</div>');
+      debugger
+      if(self.props.counter < 3) {
+        self.isMatched = true;
+        self.setState({errors: null});
+      }
     });
     
     $("#" + this.props.userId).on("swipeleft", function(event) {
